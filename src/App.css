@@ -1,0 +1,10 @@
+#app {
+  text-align: center;
+  margin: 2% auto;
+}
+
+.row {
+  width: 100%;
+  max-width: 100%;
+  line-height: 0;
+}
