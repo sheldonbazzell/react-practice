@@ -5,12 +5,22 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      rows: null
+      rows: null,
+      colorA: 'red',
+      colorB: 'black'
     }
   }
   componentWillMount() {
     let rows = prompt('How many rows?');
     this.setState(() => ({rows:rows}))
+    let colorA = prompt('First color? Note, must be hexadecimal');
+    let colorB = prompt('Second color? Note, must be hexadecimal');
+    if (/^#[0-9a-f]{3}([0-9a-f]{3})?$/i.test(colorA)) {
+        this.setState(() => ({colorA:colorA}))
+    }
+    if (/^#[0-9a-f]{3}([0-9a-f]{3})?$/i.test(colorB)) {
+        this.setState(() => ({colorB:colorB}))
+    }
   }
   render() {
     let width = Math.round(500 / Number(this.state.rows)) + "px";
@@ -25,7 +35,9 @@ class App extends Component {
         )
       }
     )
-    if (list && width) {
+    let colorA = this.state.colorA;
+    let colorB = this.state.colorB;
+    if (list && width && colorA && colorB) {
       return (
         <div id="app">
           {list && list.map((x,y) => {
@@ -37,8 +49,8 @@ class App extends Component {
                     key={b}
                     className="cell"
                     style={a === 0 ? 
-                      {background:'red', width:'45px', height:'45px', display:'inline-block'} :
-                      {background:'black', width:'45px', height:'45px', display:'inline-block'}}
+                      {background:colorA, width:'45px', height:'45px', display:'inline-block'} :
+                      {background:colorB, width:'45px', height:'45px', display:'inline-block'}}
                     >
                   </div>
                 )
